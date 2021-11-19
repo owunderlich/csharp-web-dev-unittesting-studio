@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace BalancedBracketsNS
 {
@@ -25,19 +26,23 @@ namespace BalancedBracketsNS
         */
         public static bool HasBalancedBrackets(String str)
         {
-            int brackets = 0;
-            foreach (char ch in str.ToCharArray())
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in str)
             {
-                if (ch == '[')
+                if (c.Equals('[') || c.Equals(']'))
                 {
-                    brackets++;
-                }
-                else if (ch == ']')
-                {
-                    brackets--;
+                    sb.Append(c);
                 }
             }
-            return brackets == 0;
+
+
+            while (sb.ToString().Contains("[]"))
+            {
+                    sb.Replace("[]", "");
+            }
+
+            return (sb.Length == 0);
         }
     }
 }
